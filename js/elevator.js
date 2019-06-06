@@ -7,6 +7,7 @@ class Elevator {
         this.liftMoving = '';
         this.callLiftButton = document.getElementById('test');
         this.initEventListeners();
+        //this.goToNextFloor();
     }
     initEventListeners() {
         let elements = document.getElementsByClassName('floor-btn');
@@ -42,6 +43,8 @@ class Elevator {
             self.openLiftDoor();
         }, transitionTime * 1000);
     }
+
+
 }
 window.addEventListener('load', () => {
     let elevator = new Elevator();
