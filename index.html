@@ -13,11 +13,11 @@
 <body>
     <div class="container">
         <div class="building">
-            <div class="floor1" data-floor-nr="1"></div>
-            <div class="floor2" data-floor-nr="2"></div>
-            <div class="floor3" data-floor-nr="3"></div>
-            <div class="floor4" data-floor-nr="4"></div>
-            <div class="floor5" data-floor-nr="5"></div>
+            <div id="floor5" class="floor5 floor" data-floor-nr="5"></div>
+            <div class="floor4 floor" data-floor-nr="4"></div>
+            <div class="floor3 floor" data-floor-nr="3"></div>
+            <div class="floor2 floor" data-floor-nr="2"></div>
+            <div id="floor1" class="floor1 floor" data-floor-nr="1"></div>
             <div class="elevator-shaft">
                 <div id="lift" class="elevator">
                     <div id="top-of" class="top-side"></div>
@@ -27,12 +27,12 @@
 
         </div>
     </div>
-    <button id="test" data-floor="10" onclick="callLift()">TEST!</button>
-    <button id="floor-5" data-floor="0" class="floor-btn">5</button>
-    <button id="floor-4" data-floor="100" class="floor-btn">4</button>
-    <button id="floor-3" data-floor="200" class="floor-btn">3</button>
-    <button id="floor-2" data-floor="300" class="floor-btn">2</button>
-    <button id="floor-1" data-floor="400" class="floor-btn">1</button>
+    <button id="test" data-floor="10" onclick="">TEST!</button>
+    <button id="floor-5" data-floor="5" class="floor-btn">5</button>
+    <button id="floor-4" data-floor="4" class="floor-btn">4</button>
+    <button id="floor-3" data-floor="3" class="floor-btn">3</button>
+    <button id="floor-2" data-floor="2" class="floor-btn">2</button>
+    <button id="floor-1" data-floor="1" class="floor-btn">1</button>
 
     <div class="call-lift">
 
@@ -55,15 +55,21 @@
 
     </div>
     <script type="text/javascript" src="./js/elevator.js"></script>
-    <script>
+    <!--<script>
         const goToNextFloor = (floor) => {
             let floorSelector = ".floor" + floor;
             let lift = document.getElementById("lift");
             let floorToGoTo = document.querySelector(floorSelector).offsetTop;
-            let curPos = getComputedStyle(lift).top;
-            console.log(curPos);
+            let curPos = lift.offsetTop;
+            let transitionTime = Math.floor((Math.abs(curPos - floorToGoTo))/100);
+           // if(transitionTime === 0) {transitionTime = 1};
+            lift.style.transitionDuration = (transitionTime * 1.5) + 's';
+            lift.style.top = floorToGoTo - 8 + 'px';
+    
+
+            console.log("The transitionTime is: " + transitionTime + "and the lift currentPositionis: " +  curPos + "   floor1 offsetTop is:" + document.getElementById('floor1').offsetTop  + " and floor5 offsetTop is" +document.getElementById('floor5').offsetTop );
         }
-    </script>
+    </script>-->
 
 
 </body>
