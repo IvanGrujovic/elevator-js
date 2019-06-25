@@ -8,6 +8,7 @@ class Elevator {
         this.callLiftButton = document.getElementById('test');
         this.floors = [];
         this.upOrDown = "";
+        this.transitionTime = "";
         this.initEventListeners();
         //this.sortDirection();
         //this.goToNextFloor();
@@ -27,22 +28,29 @@ class Elevator {
 
     //scan and sort floor array in order to prepare it for goToNextFloof func
     sortFloors() {
-        if (this.floors[0] - this.whereIsLift() > 0) {
-            this.upOrDown = "Up";
-            this.floors.sort((a, b) => { return a - b });
-            console.log("prvi");
+        this.goingUpOrDown();
+        let floorsAbove = [];
+        let floorsBelow = [];
+        for (let j = 0; j < this.floors.length; j++) {
+            if (this.floors[j] > this.whereIsLift()) {
+                console.log("veci");
+                floorsAbove.push(this.floors[j]);
+            }
+            else {
+                floorsBelow.push(this.floors[j])
+            }
         }
+        floorsAbove.sort((a, b) => a - b);
+        floorsBelow.sort((a, b) => b - a);
 
-        else if (this.floors[0] - this.whereIsLift() < 0) {
-            this.upOrDown = "Up"
-            this.floors.sort((a, b) => { return a - b });
+        if (this.upOrDown === "Up") {
+            this.floors = floorsAbove.concat(floorsBelow);
         }
-        /*else {
-            this.upOrDown = "Down";
-            this.floors.sort((a, b) => { return b - a });
-        }*/
+        else if (this.upOrDown === "Down") {
+            this.floors = floorsBelow.concat(floorsAbove);
+        }
     }
-
+    //determine which direction will the elevator take at first use based on the first selected floor
     goingUpOrDown() {
         if (!(this.floors[0] - this.whereIsLift() === 0)) {
             if (this.whereIsLift() - this.floors[0] < 0) {
@@ -54,10 +62,7 @@ class Elevator {
                 console.log('innerDown');
             }
         }
-
     }
-
-
 
     //close lift door
     closeLiftDoor() {
@@ -90,17 +95,25 @@ class Elevator {
     }
     */
 
+    goThroughFloors() {
+        this.sortFloors();
+
+    }
 
 
-    goToNextFloor(floor) {
+
+    goToFloor(floor) {
+        const self = this;
+        this.closeLiftDoor();
         let floorSelector = ".floor" + floor;
-        // let lift = document.getElementById("lift");
         let floorToGoTo = document.querySelector(floorSelector).offsetTop;
         let curPos = this.lift.offsetTop;
         let transitionTime = Math.floor((Math.abs(curPos - floorToGoTo)) / 100);
-        // if(transitionTime === 0) {transitionTime = 1};
         this.lift.style.transitionDuration = (transitionTime * 1.5) + 's';
         this.lift.style.top = floorToGoTo - 8 + 'px';
+        setTimeout(function () {
+            self.openLiftDoor();
+        }, transitionTime * 1600);
 
 
         console.log("The transitionTime is: " + transitionTime + "and the lift currentPositionis: " + curPos + "   floor1 offsetTop is:" + document.getElementById('floor1').offsetTop + " and floor5 offsetTop is" + document.getElementById('floor5').offsetTop);
