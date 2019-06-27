@@ -8,7 +8,7 @@ class Elevator {
         this.callLiftButton = document.getElementById('test');
         this.floors = [];
         this.upOrDown = "";
-        this.transitionTime = "";
+        //this.transitionTime = 0;
         this.initEventListeners();
         //this.sortDirection();
         //this.goToNextFloor();
@@ -97,7 +97,9 @@ class Elevator {
 
     goThroughFloors() {
         this.sortFloors();
-        this.goToFloor();
+        if (this.floors.length !== 0) {
+            this.goToFloor(this.floors[0]);
+        }
     }
 
 
@@ -108,8 +110,8 @@ class Elevator {
         let floorSelector = ".floor" + floor;
         let floorToGoTo = document.querySelector(floorSelector).offsetTop;
         let curPos = this.lift.offsetTop;
-        this.transitionTime = Math.floor((Math.abs(curPos - floorToGoTo)) / 100);
-        this.lift.style.transitionDuration = (this.transitionTime * 1.5) + 's';
+        let transitionTime = Math.floor((Math.abs(curPos - floorToGoTo)) / 100);
+        this.lift.style.transitionDuration = (transitionTime * 1.5) + 's';
         this.lift.style.top = floorToGoTo - 8 + 'px';
         setTimeout(function () {
             self.openLiftDoor();
