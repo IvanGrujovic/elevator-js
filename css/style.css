@@ -17,8 +17,8 @@
     width: 100%;
     display: grid;
     grid-template-rows: [top-of] 20% [fourth] 20% [third] 20% [second] 20% [first] 20% [bottom];
-    grid-template-columns: [left] 1fr [first] 1fr [second] 1fr [right];
-    grid-template-areas: ". middle ." ". middle ." ". middle ." ". middle ." ". middle ."
+    grid-template-columns: [far-left] 1fr [left] 1fr [first] 1fr [second] 1fr [right];
+    grid-template-areas: ". . middle ." ". . middle ." ". . middle ." ". . middle ." ". . middle ."
 }
 
 .elevator {
@@ -78,17 +78,42 @@
     grid-row: fourth / top-of;
 }
 
+.inner-panel {
+    grid-column: far-left / left
+}
+.inner-panel button{
+    display: block
+}
+
 button {
-    border: 3px solid black;
+    margin: 30px;
+    border: 2px solid black;
     border-radius: 50%;
     width: 50px;
     height: 50px;
     font-size: 20px;
     font-weight: bold;
     background-color: greenyellow;
-    -webkit-box-shadow: 10px 10px 24px 5px rgba(173, 255, 47, 1);
-    -moz-box-shadow: 10px 10px 24px 5px rgba(173, 255, 47, 1);
-    box-shadow: 10px 10px 24px 5px rgba(173, 255, 47, 1);
+    -webkit-box-shadow: 0px 0px 10px 5px rgba(173, 255, 47, 1);
+    -moz-box-shadow: 0px 0px 10px 5px rgba(173, 255, 47, 1);
+    box-shadow: 0px 0px 10px 5px rgba(173, 255, 47, 1);
+    transition: background-color 1s, box-shadow 1.2s;
+}
+
+.active{
+    background-color: crimson;
+    -webkit-box-shadow: 0px 0px 10px 5px rgba(163, 15, 45, 1);
+    -moz-box-shadow: 0px 0px 10px 5px rgba(163, 15, 45, 1);
+    box-shadow: 0px 0px 10px 5px rgba(163, 15, 45, 1);
+
+}
+
+
+button:hover{
+    background-color: #6bb300;
+    -webkit-box-shadow: 0px 0px 24px 5px rgba(107, 179, 0, 1);
+    -moz-box-shadow: 0px 0px 24px 5px rgba(107, 179, 0, 1);
+    box-shadow: 0px 0px 24px 5px rgba(107, 179, 0, 1);
 }
 
 .inner-btn {

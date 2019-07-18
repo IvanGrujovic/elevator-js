@@ -9,20 +9,17 @@ class Elevator {
         this.floors = [];
         this.upOrDown = "";
         this.transition = "";
-        //this.transitionTime = 0;
         this.initEventListeners();
         this.startTheElevator();
-        //this.sortDirection();
-        //this.goToNextFloor();
     }
 
     //this method adds the button corresponding floor number to the floors array
     initEventListeners() {
         let elements = document.getElementsByClassName('floor-btn');
-        //sortDirection();
         for (let i = 0; i < elements.length; i++) {
             elements[i].addEventListener('click', () => {
                 this.floors.push(parseInt(elements[i].getAttribute('data-floor')));
+                elements[i].classList.add('active');
             });
         }
     }
@@ -54,7 +51,6 @@ class Elevator {
         }
         floorsAbove.sort((a, b) => a - b);
         floorsBelow.sort((a, b) => b - a);
-
         if (this.upOrDown === "Up") {
             this.floors = floorsAbove.concat(floorsBelow);
         }
@@ -91,17 +87,13 @@ class Elevator {
     }
 
     goThroughFloors() {
-        var self = this;
+        let self = this;
         console.log(this.floors);
         if (this.floors.length !== 0) {
             this.sortFloors();
             this.goToFloor();
             setTimeout(function () { self.goThroughFloors() }, self.transition + 2000);
         }
-
-
-
-
         else {
             clearTimeout(this.goThroughFloors, 2000);
             this.liftMoving = false;
@@ -110,11 +102,11 @@ class Elevator {
     }
 
 
-
     goToFloor() {
         this.closeLiftDoor();
         this.liftMoving = true;
         let floorSelector = ".floor" + this.floors[0];
+        let buttonSelector = document.getElementById('floor-' + this.floors[0]);
         this.floors.shift();
         let floorToGoTo = document.querySelector(floorSelector).offsetTop;
         let curPos = this.lift.offsetTop;
@@ -122,13 +114,11 @@ class Elevator {
         this.lift.style.transitionDuration = (transitionTime * 1.5) + 's';
         this.lift.style.top = floorToGoTo - 8 + 'px';
         this.transition = transitionTime * 3000;
-        var self = this;
+        let self = this;
         setTimeout(function () {
             self.openLiftDoor();
+            buttonSelector.classList.remove('active');
         }, (transitionTime * 1000) + 2000);
-
-
-        //console.log("The transitionTime is: " + transitionTime + " and the lift currentPositionis: " + curPos + "   floor1 offsetTop is: " + document.getElementById('floor1').offsetTop + " and floor5 offsetTop is" + document.getElementById('floor5').offsetTop);
     }
 
 
@@ -142,7 +132,7 @@ class Elevator {
             }
 
         }
-        // console.log(allFloors);
+        
 
     }
 
@@ -152,8 +142,4 @@ class Elevator {
 var elevator = null;
 window.addEventListener('load', () => {
     elevator = new Elevator();
-    (function () {
-        let doIt = setTimeout(this.scanFloors, 3000);
-    })();
-    //sortDirection();
 });

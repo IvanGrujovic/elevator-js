@@ -12,6 +12,7 @@
 
 <body>
     <div class="container">
+            
         <div class="building">
             <div id="floor5" class="floor5 floor" data-floor-nr="5"></div>
             <div class="floor4 floor" data-floor-nr="4"></div>
@@ -24,35 +25,17 @@
                     <div id="elevator-door" class="elevator-door"></div>
                 </div>
             </div>
+            <div class="inner-panel">
+                <button id="floor-5" data-floor="5" class="floor-btn">5</button>
+                <button id="floor-4" data-floor="4" class="floor-btn">4</button>
+                <button id="floor-3" data-floor="3" class="floor-btn">3</button>
+                <button id="floor-2" data-floor="2" class="floor-btn">2</button>
+                <button id="floor-1" data-floor="1" class="floor-btn">1</button>
+            </div>
 
         </div>
     </div>
-    <button id="floor-5" data-floor="5" class="floor-btn">5</button>
-    <button id="floor-4" data-floor="4" class="floor-btn">4</button>
-    <button id="floor-3" data-floor="3" class="floor-btn">3</button>
-    <button id="floor-2" data-floor="2" class="floor-btn">2</button>
-    <button id="floor-1" data-floor="1" class="floor-btn">1</button>
-
-    <div class="call-lift">
-
-        <button><i class="fas fa-arrow-alt-circle-down"></i></button>
-    </div>
-    <div class="call-lift">
-        <button><i class="fas fa-arrow-alt-circle-up"></i></button>
-        <button><i class="fas fa-arrow-alt-circle-down"></i></button>
-    </div>
-    <div class="call-lift">
-        <button><i class="fas fa-arrow-alt-circle-up"></i></button>
-        <button><i class="fas fa-arrow-alt-circle-down"></i></button>
-    </div>
-    <div class="call-lift">
-        <button><i class="fas fa-arrow-alt-circle-up"></i></button>
-        <button><i class="fas fa-arrow-alt-circle-down"></i></button>
-    </div>
-    <div class="call-lift">
-        <button><i class="fas fa-arrow-alt-circle-up"></i></button>
-
-    </div>
+    
     <script type="text/javascript" src="./js/elevator.js"></script>
     <!--<script>
         const goToNextFloor = (floor) => {
