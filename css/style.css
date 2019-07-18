@@ -86,7 +86,8 @@
 }
 
 button {
-    margin: 30px;
+    margin: auto;
+    margin-top: 50px;
     border: 2px solid black;
     border-radius: 50%;
     width: 50px;
